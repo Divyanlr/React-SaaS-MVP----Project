@@ -2,9 +2,9 @@ import React from 'react'
 
 const Profile = () => {
   return (
-    <div>
-      <h1>Profile</h1>
-      <p>Manage your personal information.</p>
+    <div className="max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-2">Profile</h1>
+      <p className="text-gray-600">Manage your personal information.</p>
     </div>
   )
 }
