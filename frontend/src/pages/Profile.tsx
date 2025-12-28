@@ -8,6 +8,7 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     if (!user?.email) return;
+    
 
     const confirmDelete = window.confirm(
       "Are you sure you want to permanently delete your account?"

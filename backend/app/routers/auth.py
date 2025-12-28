@@ -1,41 +1,51 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
+from pathlib import Path
+import json
 
 router = APIRouter()
 
-# In memory user store (MVP purpose)
-fake_users_db = {}
-
+DB_FILE = Path("users.json")
 
 class AuthRequest(BaseModel):
-    email: EmailStr
+    email: str
     password: str
+
+
+def load_users():
+    if not DB_FILE.exists():
+        DB_FILE.write_text("{}")
+    return json.loads(DB_FILE.read_text())
+
+
+def save_users(users):
+    DB_FILE.write_text(json.dumps(users))
 
 
 @router.post("/register")
 def register_user(data: AuthRequest):
-    if data.email in fake_users_db:
+    users = load_users()
+
+    if data.email in users:
         raise HTTPException(status_code=400, detail="User already exists")
 
-    fake_users_db[data.email] = {"email": data.email, "password": data.password}
+    users[data.email] = {
+        "password": data.password
+    }
 
+    save_users(users)
     return {"message": "User registered successfully"}
 
 
 @router.post("/login")
 def login_user(data: AuthRequest):
-    user = fake_users_db.get(data.email)
+    users = load_users()
+    user = users.get(data.email)
 
     if not user or user["password"] != data.password:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    return {"token": "fake-jwt-token", "email": user["email"]}
-
-
-@router.delete("/delete/{email}")
-def delete_user(email: str):
-    if email not in fake_users_db:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    del fake_users_db[email]
-    return {"message": "User account deleted successfully"}
+    return {
+        "token": "fake-jwt-token",
+        "email": data.email
+    }

@@ -2,7 +2,13 @@ import LeftSidebar from "../components/LeftSidebar";
 
 export default function Dashboard() {
   const storedUser = localStorage.getItem("user");
-  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  const user =
+    storedUser && storedUser !== "undefined" ? JSON.parse(storedUser) : null;
+
+  if (!user) {
+    return <p>Please login to continue.</p>;
+  }
 
   const stats = [
     { label: "CO₂ Saved", value: "1.2t" },
@@ -15,7 +21,7 @@ export default function Dashboard() {
       <LeftSidebar />
 
       <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-2xl font-semibold mb-2">Welcome {user.email}</h1>
+        <h1 className="text-2xl font-semibold mb-2">Welcome {user?.email}</h1>
 
         <p className="text-gray-600 mb-6">This is your dashboard overview.</p>
 
