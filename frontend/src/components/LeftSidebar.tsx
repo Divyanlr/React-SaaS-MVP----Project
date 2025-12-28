@@ -1,20 +1,22 @@
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { clearToken } from "../utils/auth";
 
 export default function LeftSidebar() {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("user")
-    navigate("/login")
-  }
+    localStorage.removeItem("user");
+    clearToken();
+    navigate("/");
+  };
 
   const linkClass = (path: string) =>
     `block px-4 py-3 rounded text-sm ${
       location.pathname === path
         ? "bg-green-600 text-white"
         : "text-gray-700 hover:bg-green-100"
-    }`
+    }`;
 
   return (
     <aside className="w-64 min-h-screen border-r bg-white flex flex-col">
@@ -43,5 +45,5 @@ export default function LeftSidebar() {
         </button>
       </div>
     </aside>
-  )
+  );
 }
