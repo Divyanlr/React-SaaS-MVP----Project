@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom";
-import Landing from "../../pages/Landing";
-import Login from "../../pages/Login";
-import Register from "../../pages/Register";
-import Dashboard from "../../pages/Dashboard";
-import Profile from "../../pages/Profile";
-import ProtectedRoute from "../guards/ProtectedRoute";
+import { Routes, Route } from "react-router-dom"
+import Landing from "../../pages/Landing"
+import Login from "../../pages/Login"
+import Register from "../../pages/Register"
+import Dashboard from "../../pages/Dashboard"
+import Profile from "../../pages/Profile"
+import ProtectedRoute from "../guards/ProtectedRoute"
 
 export default function AppRoutes() {
   return (
@@ -12,6 +12,7 @@ export default function AppRoutes() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
       <Route
         path="/dashboard"
         element={
@@ -20,6 +21,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/profile"
         element={
@@ -29,5 +31,5 @@ export default function AppRoutes() {
         }
       />
     </Routes>
-  );
+  )
 }

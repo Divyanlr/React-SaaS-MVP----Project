@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 import { isAuthenticated } from "../../utils/auth"
-import type { JSX } from "react/jsx-dev-runtime"
+import type { JSX } from "react"
 
 type Props = {
   children: JSX.Element
