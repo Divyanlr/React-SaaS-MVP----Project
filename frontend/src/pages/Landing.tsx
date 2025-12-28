@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import { isAuthenticated } from "../utils/auth"
+import { Link } from "react-router-dom";
+import { isAuthenticated } from "../utils/auth";
 
 export default function Landing() {
-  const loggedIn = isAuthenticated()
+  const loggedIn = isAuthenticated();
 
   return (
     <div>
@@ -51,5 +51,5 @@ export default function Landing() {
         )}
       </section>
     </div>
-  )
+  );
 }

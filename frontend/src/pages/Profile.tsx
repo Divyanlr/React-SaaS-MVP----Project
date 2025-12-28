@@ -6,9 +6,12 @@ const Profile = () => {
   const storedUser = localStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
 
+  if (!user) {
+    return <p>Please login to continue.</p>;
+  }
+
   const handleDeleteAccount = async () => {
     if (!user?.email) return;
-    
 
     const confirmDelete = window.confirm(
       "Are you sure you want to permanently delete your account?"
@@ -16,12 +19,8 @@ const Profile = () => {
 
     if (!confirmDelete) return;
 
-    await fetch(`http://localhost:8000/auth/delete/${user.email}`, {
-      method: "DELETE",
-    });
-
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/register");
   };
 
   return (
@@ -34,15 +33,11 @@ const Profile = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm max-w-xl">
           <div className="mb-4">
             <p className="text-sm text-gray-500">Email</p>
-            <p className="font-medium text-gray-800">
-              {user?.email}
-            </p>
+            <p className="font-medium text-gray-800">{user?.email}</p>
           </div>
 
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-600 mb-3">
-              GDPR Controls
-            </p>
+            <p className="text-sm text-gray-600 mb-3">GDPR Controls</p>
 
             <button
               onClick={handleDeleteAccount}

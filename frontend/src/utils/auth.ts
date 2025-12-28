@@ -5,13 +5,20 @@ export const setToken = (token: string) => {
 }
 
 export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY)
-}
-
-export const clearToken = () => {
-  localStorage.removeItem(TOKEN_KEY)
+  return localStorage.getItem("auth_token")
 }
 
 export const isAuthenticated = () => {
-  return Boolean(getToken())
+  const token = localStorage.getItem("auth_token")
+  const user = localStorage.getItem("user")
+
+  if (!token || !user || user === "undefined") {
+    return false
+  }
+
+  return true
+}
+
+export const clearToken = () => {
+  localStorage.removeItem("auth_token")
 }

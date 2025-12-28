@@ -1,15 +1,15 @@
-import { Navigate } from "react-router-dom"
-import { isAuthenticated } from "../../utils/auth"
-import type { JSX } from "react"
+import { Navigate } from "react-router-dom";
+import { isAuthenticated } from "../../utils/auth";
+import type { JSX } from "react";
 
 type Props = {
-  children: JSX.Element
-}
+  children: JSX.Element;
+};
 
 export default function ProtectedRoute({ children }: Props) {
   if (!isAuthenticated()) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />;
   }
 
-  return children
+  return children;
 }
