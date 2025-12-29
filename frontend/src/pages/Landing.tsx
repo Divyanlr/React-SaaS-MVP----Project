@@ -154,10 +154,10 @@ export default function Landing() {
         <div className="max-w-5xl mx-auto flex justify-between items-center text-sm text-gray-600">
           <p>© Dummy-site</p>
           <div className="space-x-6">
-            <Link to="/privacy" className="hover:text-blue-600 transition">
+            <Link to="#" className="hover:text-blue-600 transition">
               Privacy
             </Link>
-            <Link to="/terms" className="hover:text-blue-600 transition">
+            <Link to="#" className="hover:text-blue-600 transition">
               Terms
             </Link>
           </div>
