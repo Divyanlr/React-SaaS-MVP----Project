@@ -49,3 +49,16 @@ def login_user(data: AuthRequest):
         "token": "fake-jwt-token",
         "email": data.email
     }
+
+
+@router.delete("/delete-user/{email}")
+def delete_user(email: str):
+    users = load_users()
+
+    if email not in users:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    del users[email]
+    save_users(users)
+
+    return {"message": "User deleted successfully"}
